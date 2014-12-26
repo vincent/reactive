@@ -3,17 +3,23 @@
     #playground { position: relative; height: 100%;}
     #playground > * { position: absolute; content: ""; background-size: contain; }
 
-    [data-name=cat]           { top: 0; left: 0; width: 100px; height: 100px;
-                                        background: url(images/cat.jpg) }
-    [data-name=dragon]     { top: 0; right: 0; width: 100px; height: 100px;
-                                        background: url(images/dragon.png) }
-    [data-name=drunkard]  { bottom: 0; left: 0; width: 100px; height: 100px;
-                                        background: url(images/drunkard.png) }
-    [data-name=elf]           { bottom: 0; right: 0; width: 100px; height: 100px;
-                                        background: url(images/elf.png) }
-    [data-name=oracle]      { bottom: 50%; right: 50%; width: 100px; height: 100px;
-                                        background: url(images/oracle.png) }
+    [data-name=cat] {
+        top: 0; left: 0; width: 100px; height: 100px; background: url(images/cat.jpg)
+    }
+    [data-name=dragon] {
+        top: 0; right: 0; width: 100px; height: 100px; background: url(images/dragon.png)
+    }
+    [data-name=drunkard] {
+        bottom: 0; left: 0; width: 100px; height: 100px; background: url(images/drunkard.png)
+    }
+    [data-name=elf] {
+        bottom: 0; right: 0; width: 100px; height: 100px; background: url(images/elf.png)
+    }
+    [data-name=oracle] {
+        bottom: 50%; right: 50%; width: 100px; height: 100px; background: url(images/oracle.png)
+    }
     </style>
+
     <div id="playground">
         <div data-class="animal" data-name="cat"></div>
         <div data-class="dragon" data-name="dragon"></div>
@@ -21,67 +27,71 @@
         <div data-class="person" data-gender="woman" data-name="elf"></div>
         <div data-class="person" data-gender="man" data-name="oracle" data-emotion="scary"></div>
     </div>
+
     <script type="text/javascript" src="jquery-1.11.1.js"></script>
-    <script type="text/javascript" src="../node_modules/lokijs/build/lokijs.min.js"></script>
+    <script type="text/javascript" src="../node_modules/underscore-query/node_modules/underscore/underscore.js"></script>
+    <script type="text/javascript" src="../node_modules/underscore-query/lib/underscore-query.js"></script>
     <script type="text/javascript" src="buffer-loader.js"></script>
     <script type="text/javascript" src="../index.js"></script>
+
     <script type="text/javascript">
+
     var r = new Reactive();
 
-    r.add({ gender:'man', text:"Fuck you all",
-        sound:'sounds/101324__cocamycola89__fuck-you-all.wav' });
+    r.add({ gender:'man',
+        text:'Fuck you all', sound:'sounds/101324__cocamycola89__fuck-you-all.wav',
+        response:{ emotion:'questionnable' } });
 
-    r.add({ gender:'man', text:"Hum ?",
-        sound:'sounds/104696__grunz__grunz-huh.wav' });
+    r.add({ gender:'man',
+        text:'Hum ?', sound:'sounds/104696__grunz__grunz-huh.wav' });
 
-    r.add({ gender:'man', text:"Sigh",
-        sound:'sounds/146769__tgfcoder__sigh1.wav' });
+    r.add({ gender:'man', emotion:'questionnable',
+        text:'Sigh', sound:'sounds/146769__tgfcoder__sigh1.wav' });
 
-    r.add({ gender:'man', emotion:'drunk', text:"Happy birthday !",
-        sound:'sounds/17643__twistedlemon__happy-birthday.wav' });
+    r.add({ gender:'man', emotion:'drunk',
+        text:'Happy birthday !', sound:'sounds/17643__twistedlemon__happy-birthday.wav',
+        response:{ emotion:'funny' } });
 
-    r.add({ gender:'animal', emotion:'drunk', text:"Yeeppeee !",
-        sound:'sounds/18054__zippi1__sound-jupeee.wav' });
+    r.add({ gender:'animal', emotion:'drunk',
+        text:'Yeeppeee !', sound:'sounds/18054__zippi1__sound-jupeee.wav',
+        response: { emotion:'questionnable' } });
 
-    r.add({ class:'animal', text:"Meoww",
-        sound:'sounds/18271__zippi1__sound-meow2.wav' });
+    r.add({ class:'animal',
+        text:'Meoww', sound:'sounds/18271__zippi1__sound-meow2.wav' });
 
-    r.add({ class:'cop', text:"No one wants to go to jail for things",
-        sound:'sounds/30627__erh__no-one-wants.wav' });
+    r.add({ class:'cop', emotion:'questionnable',
+        text:'No one wants to go to jail for things', sound:'sounds/30627__erh__no-one-wants.wav' });
 
-    r.add({ gender:'man', text:"Hey",
-        sound:'sounds/35902__syna-max__hey.wav' });
+    r.add({ gender:'man',
+        text:'Hey', sound:'sounds/35902__syna-max__hey.wav' });
 
-    r.add({ gender:'woman', text:"Hellow",
-        sound:'sounds/4053__noisecollector__female-hello.wav',
+    r.add({ gender:'woman',
+        text:'Hellow', sound:'sounds/4053__noisecollector__female-hello.wav',
         response:'' });
 
-    r.add({ class:'dragon', text:"Rroooaarr",
-        sound:'sounds/4513__noisecollector__dragon9.wav',
+    r.add({ class:'dragon',
+        text:'Rroooaarr', sound:'sounds/4513__noisecollector__dragon9.wav',
         response: { emotion:'scared' } });
 
-    r.add({ gender:'man', emotion:'scared', text:"Oh my God look, it's coming back",
-        sound:'sounds/47345__alphahog__oh-my-god-look.mp3',
-        response:{ emotion:'scared' } });
+    r.add({ gender:'man', emotion:'scared',
+        text:"Oh my God look, it's coming back", sound:'sounds/47345__alphahog__oh-my-god-look.mp3',
+        response: { emotion:'scared' } });
 
-    r.add({ gender:'woman', text:"Hu hu hum",
-        sound:'sounds/58650__levite-sound__laugh1.wav' });
+    r.add({ gender:'woman', emotion:'funny',
+        text:'Hu hu hum', sound:'sounds/58650__levite-sound__laugh1.wav',
+        response: {gender:'man', emotion:'interested'} });
 
-    r.add({ gender:'man', emotion:'scared', text:"There is no god",
-        sound:'sounds/68382__morgantj__thereisnogodwhisper.mp3' });
+    r.add({ gender:'man', emotion:'scared',
+        text:'There is no god', sound:'sounds/68382__morgantj__thereisnogodwhisper.mp3' });
 
-    r.add({ gender:'man', text:"Hey hey",
-        sound:'sounds/88401__justincase1021__hey-hey-a.wav' });
+    r.add({ gender:'man', emotion:'interested',
+        text:'Hey hey', sound:'sounds/88401__justincase1021__hey-hey-a.wav' });
 
     r.loadSounds();
 
-    var serialize = function (event) {
-        var el = $(event.target);
-        return el.data();
-    }
-
-    $('#playground > *').mouseenter(function (e) {
-        r.queryplay(serialize(e));
+    $('#playground > *').click(function (e) {
+        r.queryplay($(e.target).data());
     })
+
     </script>
 </html>
